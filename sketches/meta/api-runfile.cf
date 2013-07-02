@@ -2,6 +2,20 @@
 
 # environment common bundles
 
+# environment 17ed5fd85b72395cbbb75bc02ff389aa
+bundle common 17ed5fd85b72395cbbb75bc02ff389aa
+{
+  vars:
+      "activated" string => "--'activated' value passed as a class function--";
+      "env_vars" slist => { "activated", "test", "verbose" };
+      "test" string => "";
+      "verbose" string => "";
+  classes:
+      "runenv_17ed5fd85b72395cbbb75bc02ff389aa_activated" and => { classmatch("linux"), classmatch("ubuntu") };
+      "runenv_17ed5fd85b72395cbbb75bc02ff389aa_test" expression => "!any";
+      "runenv_17ed5fd85b72395cbbb75bc02ff389aa_verbose" expression => "!any";
+}
+
 
 # activation data
 bundle common cfsketch_g
@@ -9,21 +23,47 @@ bundle common cfsketch_g
   vars:
       # Files that need to be loaded for the activated sketches and
       # their dependencies.
-      "inputs" slist => { "cf_null" };
+      "inputs" slist => { "sketches/libraries/dclib/library.cf", "sketches/package_management/packages_installed/main.cf" };
 }
 
 bundle agent cfsketch_run
 {
   vars:
 
+      # array 'metadata' from definition sketch metadata, activation __test_001_Packages_installed_installed
+      "__test_001_Packages_installed_installed_metadata[activation][identifier]" string => "test";
+      "__test_001_Packages_installed_installed_metadata[activation][timestamp]" string => "1372809139";
+      "__test_001_Packages_installed_installed_metadata[api][][type]" string => "bundle_options";
+      "__test_001_Packages_installed_installed_metadata[api][metadata][type]" string => "metadata";
+      "__test_001_Packages_installed_installed_metadata[api][pkgs_add][type]" string => "list";
+      "__test_001_Packages_installed_installed_metadata[api][runenv][type]" string => "environment";
+      "__test_001_Packages_installed_installed_metadata[authors]" slist => { "Eystein Stenberg <eystein.maloy.stenberg@cfengine.com>" };
+      "__test_001_Packages_installed_installed_metadata[bundle_options][single_use]" string => "1";
+      "__test_001_Packages_installed_installed_metadata[depends]" slist => { "CFEngine::dclib", "CFEngine::stdlib" };
+      "__test_001_Packages_installed_installed_metadata[license]" string => "MIT";
+      "__test_001_Packages_installed_installed_metadata[location]" string => "sketches/package_management/packages_installed";
+      "__test_001_Packages_installed_installed_metadata[manifest]" slist => { "README.md", "main.cf", "params/demo.json", "test.cf", "test.pl" };
+      "__test_001_Packages_installed_installed_metadata[manifest_cf]" slist => { "main.cf", "test.cf" };
+      "__test_001_Packages_installed_installed_metadata[manifest_docs]" slist => { "README.md" };
+      "__test_001_Packages_installed_installed_metadata[manifest_exe]" slist => { "cf_null" };
+      "__test_001_Packages_installed_installed_metadata[manifest_extra]" slist => { "params/demo.json" };
+      "__test_001_Packages_installed_installed_metadata[manifest_test]" slist => { "test.pl" };
+      "__test_001_Packages_installed_installed_metadata[name]" string => "Packages::installed";
+      "__test_001_Packages_installed_installed_metadata[tags]" slist => { "cfdc", "packages", "enterprise_compatible" };
+      "__test_001_Packages_installed_installed_metadata[version]" string => "1.0.0";
 
+      # list 'pkgs_add' from definition 5c9c8d4d8e676c16bb204f9adfee53df, activation __test_001_Packages_installed_installed
+      "__test_001_Packages_installed_installed_pkgs_add" slist => { "test" };
 
   methods:
     any::
       "cfsketch_g" usebundle => "cfsketch_g";
+      "17ed5fd85b72395cbbb75bc02ff389aa" usebundle => "17ed5fd85b72395cbbb75bc02ff389aa";
 
-
+    runenv_17ed5fd85b72395cbbb75bc02ff389aa_activated::
+      "__test_001_Packages_installed_installed" usebundle => cfdc_packages:installed("17ed5fd85b72395cbbb75bc02ff389aa", "default:cfsketch_run.__test_001_Packages_installed_installed_metadata", @(cfsketch_run.__test_001_Packages_installed_installed_pkgs_add)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___test_001_Packages_installed_installed";
 
   reports:
     inform_mode::
+      "activation __test_001_Packages_installed_installed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
 }
