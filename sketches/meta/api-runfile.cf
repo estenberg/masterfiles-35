@@ -16,6 +16,20 @@ bundle common 1b6aaf65758a53826053c5dd3e893e29
       "runenv_1b6aaf65758a53826053c5dd3e893e29_verbose" expression => "!any";
 }
 
+# environment 04d95ef41b01cbd5b5c00fc847b3f584
+bundle common 04d95ef41b01cbd5b5c00fc847b3f584
+{
+  vars:
+      "activated" string => "--'activated' value passed as a class function--";
+      "env_vars" slist => { "activated", "test", "verbose" };
+      "test" string => "";
+      "verbose" string => "";
+  classes:
+      "runenv_04d95ef41b01cbd5b5c00fc847b3f584_activated" and => { classmatch("linux"), classmatch("centos") };
+      "runenv_04d95ef41b01cbd5b5c00fc847b3f584_test" expression => "!any";
+      "runenv_04d95ef41b01cbd5b5c00fc847b3f584_verbose" expression => "!any";
+}
+
 
 # activation data
 bundle common cfsketch_g
@@ -55,15 +69,44 @@ bundle agent cfsketch_run
       # list 'pkgs_add' from definition 445d6eccddd567e4cc0c73d8a89b2c35, activation __apache_web_server_001_Packages_installed_installed
       "__apache_web_server_001_Packages_installed_installed_pkgs_add" slist => { "apache2" };
 
+      # array 'metadata' from definition sketch metadata, activation __sysstat_002_Packages_installed_installed
+      "__sysstat_002_Packages_installed_installed_metadata[activation][identifier]" string => "sysstat";
+      "__sysstat_002_Packages_installed_installed_metadata[activation][timestamp]" string => "1373302136";
+      "__sysstat_002_Packages_installed_installed_metadata[api][][type]" string => "bundle_options";
+      "__sysstat_002_Packages_installed_installed_metadata[api][metadata][type]" string => "metadata";
+      "__sysstat_002_Packages_installed_installed_metadata[api][pkgs_add][type]" string => "list";
+      "__sysstat_002_Packages_installed_installed_metadata[api][runenv][type]" string => "environment";
+      "__sysstat_002_Packages_installed_installed_metadata[authors]" slist => { "Eystein Stenberg <eystein.maloy.stenberg@cfengine.com>" };
+      "__sysstat_002_Packages_installed_installed_metadata[bundle_options][single_use]" string => "1";
+      "__sysstat_002_Packages_installed_installed_metadata[depends]" slist => { "CFEngine::dclib", "CFEngine::stdlib" };
+      "__sysstat_002_Packages_installed_installed_metadata[license]" string => "MIT";
+      "__sysstat_002_Packages_installed_installed_metadata[location]" string => "sketches/package_management/packages_installed";
+      "__sysstat_002_Packages_installed_installed_metadata[manifest]" slist => { "README.md", "main.cf", "params/demo.json", "test.cf", "test.pl" };
+      "__sysstat_002_Packages_installed_installed_metadata[manifest_cf]" slist => { "main.cf", "test.cf" };
+      "__sysstat_002_Packages_installed_installed_metadata[manifest_docs]" slist => { "README.md" };
+      "__sysstat_002_Packages_installed_installed_metadata[manifest_exe]" slist => { "cf_null" };
+      "__sysstat_002_Packages_installed_installed_metadata[manifest_extra]" slist => { "params/demo.json" };
+      "__sysstat_002_Packages_installed_installed_metadata[manifest_test]" slist => { "test.pl" };
+      "__sysstat_002_Packages_installed_installed_metadata[name]" string => "Packages::installed";
+      "__sysstat_002_Packages_installed_installed_metadata[tags]" slist => { "cfdc", "packages", "enterprise_compatible" };
+      "__sysstat_002_Packages_installed_installed_metadata[version]" string => "1.0.0";
+
+      # list 'pkgs_add' from definition 19ad4496e109381d19593ed02db126e9, activation __sysstat_002_Packages_installed_installed
+      "__sysstat_002_Packages_installed_installed_pkgs_add" slist => { "sysstat" };
+
   methods:
     any::
       "cfsketch_g" usebundle => "cfsketch_g";
       "1b6aaf65758a53826053c5dd3e893e29" usebundle => "1b6aaf65758a53826053c5dd3e893e29";
+      "04d95ef41b01cbd5b5c00fc847b3f584" usebundle => "04d95ef41b01cbd5b5c00fc847b3f584";
 
     runenv_1b6aaf65758a53826053c5dd3e893e29_activated::
       "__apache_web_server_001_Packages_installed_installed" usebundle => cfdc_packages:installed("1b6aaf65758a53826053c5dd3e893e29", "default:cfsketch_run.__apache_web_server_001_Packages_installed_installed_metadata", @(cfsketch_run.__apache_web_server_001_Packages_installed_installed_pkgs_add)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___apache_web_server_001_Packages_installed_installed";
+    runenv_04d95ef41b01cbd5b5c00fc847b3f584_activated::
+      "__sysstat_002_Packages_installed_installed" usebundle => cfdc_packages:installed("04d95ef41b01cbd5b5c00fc847b3f584", "default:cfsketch_run.__sysstat_002_Packages_installed_installed_metadata", @(cfsketch_run.__sysstat_002_Packages_installed_installed_pkgs_add)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___sysstat_002_Packages_installed_installed";
 
   reports:
     inform_mode::
       "activation __apache_web_server_001_Packages_installed_installed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
+      "activation __sysstat_002_Packages_installed_installed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
 }
