@@ -23,37 +23,62 @@ bundle common cfsketch_g
   vars:
       # Files that need to be loaded for the activated sketches and
       # their dependencies.
-      "inputs" slist => { "sketches/libraries/dclib/library.cf", "sketches/package_management/packages_removed/main.cf" };
+      "inputs" slist => { "sketches/libraries/dclib/library.cf", "sketches/package_management/packages_installed/main.cf", "sketches/package_management/packages_removed/main.cf" };
 }
 
 bundle agent cfsketch_run
 {
   vars:
 
-      # array 'metadata' from definition sketch metadata, activation __pkrizaktest_001_Packages_removed_removed
-      "__pkrizaktest_001_Packages_removed_removed_metadata[activation][identifier]" string => "pkrizaktest";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[activation][timestamp]" string => "1374076656";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[api][][type]" string => "bundle_options";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[api][metadata][type]" string => "metadata";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[api][pkgs_removed][type]" string => "list";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[api][runenv][type]" string => "environment";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[authors]" slist => { "Eystein Stenberg <eystein.maloy.stenberg@cfengine.com>" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[bundle_options][single_use]" string => "1";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[depends]" slist => { "CFEngine::dclib", "CFEngine::stdlib" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[license]" string => "MIT";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[location]" string => "sketches/package_management/packages_removed";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest]" slist => { "README.md", "main.cf", "params/demo.json" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest_cf]" slist => { "main.cf" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest_docs]" slist => { "README.md" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest_exe]" slist => { "cf_null" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest_extra]" slist => { "params/demo.json" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[manifest_test]" slist => { "cf_null" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[name]" string => "Packages::removed";
-      "__pkrizaktest_001_Packages_removed_removed_metadata[tags]" slist => { "cfdc", "packages", "enterprise_compatible" };
-      "__pkrizaktest_001_Packages_removed_removed_metadata[version]" string => "1.0.0";
+      # array 'metadata' from definition sketch metadata, activation __Test_001_Packages_installed_installed
+      "__Test_001_Packages_installed_installed_metadata[activation][identifier]" string => "Test";
+      "__Test_001_Packages_installed_installed_metadata[activation][timestamp]" string => "1374134699";
+      "__Test_001_Packages_installed_installed_metadata[api][][type]" string => "bundle_options";
+      "__Test_001_Packages_installed_installed_metadata[api][metadata][type]" string => "metadata";
+      "__Test_001_Packages_installed_installed_metadata[api][pkgs_add][type]" string => "list";
+      "__Test_001_Packages_installed_installed_metadata[api][runenv][type]" string => "environment";
+      "__Test_001_Packages_installed_installed_metadata[authors]" slist => { "Eystein Stenberg <eystein.maloy.stenberg@cfengine.com>" };
+      "__Test_001_Packages_installed_installed_metadata[bundle_options][single_use]" string => "1";
+      "__Test_001_Packages_installed_installed_metadata[depends]" slist => { "CFEngine::dclib", "CFEngine::stdlib" };
+      "__Test_001_Packages_installed_installed_metadata[license]" string => "MIT";
+      "__Test_001_Packages_installed_installed_metadata[location]" string => "sketches/package_management/packages_installed";
+      "__Test_001_Packages_installed_installed_metadata[manifest]" slist => { "README.md", "main.cf", "params/demo.json", "test.cf", "test.pl" };
+      "__Test_001_Packages_installed_installed_metadata[manifest_cf]" slist => { "main.cf", "test.cf" };
+      "__Test_001_Packages_installed_installed_metadata[manifest_docs]" slist => { "README.md" };
+      "__Test_001_Packages_installed_installed_metadata[manifest_exe]" slist => { "cf_null" };
+      "__Test_001_Packages_installed_installed_metadata[manifest_extra]" slist => { "params/demo.json" };
+      "__Test_001_Packages_installed_installed_metadata[manifest_test]" slist => { "test.pl" };
+      "__Test_001_Packages_installed_installed_metadata[name]" string => "Packages::installed";
+      "__Test_001_Packages_installed_installed_metadata[tags]" slist => { "cfdc", "packages", "enterprise_compatible" };
+      "__Test_001_Packages_installed_installed_metadata[version]" string => "1.0.0";
 
-      # list 'pkgs_removed' from definition 411b7aa7023f411bc16b0964634d0720, activation __pkrizaktest_001_Packages_removed_removed
-      "__pkrizaktest_001_Packages_removed_removed_pkgs_removed" slist => { "telnetd" };
+      # list 'pkgs_add' from definition 8024934e540a1ac2b111572b74695d75, activation __Test_001_Packages_installed_installed
+      "__Test_001_Packages_installed_installed_pkgs_add" slist => { "apache2", "zsh" };
+
+      # array 'metadata' from definition sketch metadata, activation __pkrizaktest_002_Packages_removed_removed
+      "__pkrizaktest_002_Packages_removed_removed_metadata[activation][identifier]" string => "pkrizaktest";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[activation][timestamp]" string => "1374076656";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[api][][type]" string => "bundle_options";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[api][metadata][type]" string => "metadata";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[api][pkgs_removed][type]" string => "list";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[api][runenv][type]" string => "environment";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[authors]" slist => { "Eystein Stenberg <eystein.maloy.stenberg@cfengine.com>" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[bundle_options][single_use]" string => "1";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[depends]" slist => { "CFEngine::dclib", "CFEngine::stdlib" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[license]" string => "MIT";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[location]" string => "sketches/package_management/packages_removed";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest]" slist => { "README.md", "main.cf", "params/demo.json" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest_cf]" slist => { "main.cf" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest_docs]" slist => { "README.md" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest_exe]" slist => { "cf_null" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest_extra]" slist => { "params/demo.json" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[manifest_test]" slist => { "cf_null" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[name]" string => "Packages::removed";
+      "__pkrizaktest_002_Packages_removed_removed_metadata[tags]" slist => { "cfdc", "packages", "enterprise_compatible" };
+      "__pkrizaktest_002_Packages_removed_removed_metadata[version]" string => "1.0.0";
+
+      # list 'pkgs_removed' from definition 411b7aa7023f411bc16b0964634d0720, activation __pkrizaktest_002_Packages_removed_removed
+      "__pkrizaktest_002_Packages_removed_removed_pkgs_removed" slist => { "telnetd" };
 
   methods:
     any::
@@ -61,9 +86,12 @@ bundle agent cfsketch_run
       "17ed5fd85b72395cbbb75bc02ff389aa" usebundle => "17ed5fd85b72395cbbb75bc02ff389aa";
 
     runenv_17ed5fd85b72395cbbb75bc02ff389aa_activated::
-      "__pkrizaktest_001_Packages_removed_removed" usebundle => cfdc_packages:removed("17ed5fd85b72395cbbb75bc02ff389aa", "default:cfsketch_run.__pkrizaktest_001_Packages_removed_removed_metadata", @(cfsketch_run.__pkrizaktest_001_Packages_removed_removed_pkgs_removed)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___pkrizaktest_001_Packages_removed_removed";
+      "__Test_001_Packages_installed_installed" usebundle => cfdc_packages:installed("17ed5fd85b72395cbbb75bc02ff389aa", "default:cfsketch_run.__Test_001_Packages_installed_installed_metadata", @(cfsketch_run.__Test_001_Packages_installed_installed_pkgs_add)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___Test_001_Packages_installed_installed";
+    runenv_17ed5fd85b72395cbbb75bc02ff389aa_activated::
+      "__pkrizaktest_002_Packages_removed_removed" usebundle => cfdc_packages:removed("17ed5fd85b72395cbbb75bc02ff389aa", "default:cfsketch_run.__pkrizaktest_002_Packages_removed_removed_metadata", @(cfsketch_run.__pkrizaktest_002_Packages_removed_removed_pkgs_removed)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___pkrizaktest_002_Packages_removed_removed";
 
   reports:
     inform_mode::
-      "activation __pkrizaktest_001_Packages_removed_removed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
+      "activation __Test_001_Packages_installed_installed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
+      "activation __pkrizaktest_002_Packages_removed_removed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
 }
