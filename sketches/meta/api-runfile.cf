@@ -23,7 +23,7 @@ bundle common cfsketch_g
   vars:
       # Files that need to be loaded for the activated sketches and
       # their dependencies.
-      "inputs" slist => { "sketches/libraries/dclib/library.cf", "sketches/package_management/packages_installed/main.cf", "sketches/libraries/dclib-3.5.0/library.cf", "sketches/databases/postgresql_install_simple/main.cf" };
+      "inputs" slist => { "sketches/libraries/dclib/library.cf", "sketches/package_management/packages_installed/main.cf" };
 }
 
 bundle agent cfsketch_run
@@ -55,27 +55,6 @@ bundle agent cfsketch_run
       # list 'pkgs_add' from definition cd4dab97be4005926bc0bf23de9c02ba, activation __Application_stack_for_developers_001_Packages_installed_installed
       "__Application_stack_for_developers_001_Packages_installed_installed_pkgs_add" slist => { "apache2", "java", "tomcat" };
 
-      # array 'mymetadata' from definition sketch metadata, activation __Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[activation][identifier]" string => "Production db backend";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[activation][timestamp]" string => "1377647608";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[api][installed][type]" string => "return";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[api][mymetadata][type]" string => "metadata";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[api][runenv][type]" string => "environment";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[api][running][type]" string => "return";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[authors]" slist => { "Nakarin Phooripoom <nakarin.phooripoom@cfengine.com>", "Ted Zlatanov <tzz@lifelogs.com>" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[depends]" slist => { "CFEngine::dclib", "CFEngine::dclib::3.5.0", "CFEngine::stdlib" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[license]" string => "MIT";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[location]" string => "sketches/databases/postgresql_install_simple";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest]" slist => { "README.md", "main.cf", "params/demo_client.json", "params/demo_server.json" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest_cf]" slist => { "main.cf" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest_docs]" slist => { "README.md" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest_exe]" slist => { "cf_null" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest_extra]" slist => { "params/demo_client.json", "params/demo_server.json" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[manifest_test]" slist => { "cf_null" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[name]" string => "Database::Install::PostgreSQL::Simple";
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[tags]" slist => { "cfdc", "database", "postgresql", "enterprise_compatible" };
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata[version]" string => "1.1";
-
   methods:
     any::
       "cfsketch_g" usebundle => "cfsketch_g";
@@ -83,13 +62,8 @@ bundle agent cfsketch_run
 
     runenv_1b6aaf65758a53826053c5dd3e893e29_activated::
       "__Application_stack_for_developers_001_Packages_installed_installed" usebundle => cfdc_packages:installed("1b6aaf65758a53826053c5dd3e893e29", "default:cfsketch_run.__Application_stack_for_developers_001_Packages_installed_installed_metadata", @(cfsketch_run.__Application_stack_for_developers_001_Packages_installed_installed_pkgs_add)), ifvarclass => "(centos|debian|redhat|ubuntu)", useresult => "return___Application_stack_for_developers_001_Packages_installed_installed";
-    runenv_1b6aaf65758a53826053c5dd3e893e29_activated::
-      "__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple" usebundle => cfdc_db_postgresql:simple("1b6aaf65758a53826053c5dd3e893e29", "default:cfsketch_run.__Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple_mymetadata"), ifvarclass => "(redhat_6|ubuntu_12_4)", useresult => "return___Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple";
 
   reports:
     inform_mode::
       "activation __Application_stack_for_developers_001_Packages_installed_installed could not run because it requires classes (centos|debian|redhat|ubuntu)" ifvarclass => "inform_mode.!((centos|debian|redhat|ubuntu))";
-      "activation __Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple returned installed = $(return___Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple[installed])";
-      "activation __Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple returned running = $(return___Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple[running])";
-      "activation __Production_db_backend_002_Database_Install_PostgreSQL_Simple_simple could not run because it requires classes (redhat_6|ubuntu_12_4)" ifvarclass => "inform_mode.!((redhat_6|ubuntu_12_4))";
 }
